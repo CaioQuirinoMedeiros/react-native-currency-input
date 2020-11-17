@@ -6,7 +6,8 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "start": "react-native start"
+    "start": "react-native start",
+    "adb-reverse": "adb reverse tcp:8081 tcp:8081"
   },
   "dependencies": {
     "react": "16.11.0",
