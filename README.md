@@ -18,7 +18,7 @@ The goal of `react-native-currency-input` is to offer a simple and effective way
 **BONUS**
 
 - [`<FakeCurrencyInput />`](#fakecurrencyinput): A fake input that hides the real TextInput in order to terminate the [flickering issue](https://reactnative.dev/docs/textinput#value)
-- [`formatNumber()`](#formatnumber): A function that formats number
+- [`formatNumber()`](#formatnumbervalue-options): A function that formats number
 
 ## Installation
 
@@ -60,9 +60,9 @@ function MyComponent() {
 
 This component uses the same props as [<TextInput/>](https://facebook.github.io/react-native/docs/textinput.html). Below are additional props for this component:
 
-| Prop             | Type     | Default | Description                                                                                                                                   |
-| ---------------- | -------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`value`**      | number   |         | The value for controlled input. **REQUIRED**                                                                                                  |
+| Prop                 | Type     | Default | Description                                                                                                                                   |
+| -------------------- | -------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`value`**          | number   |         | The value for controlled input. **REQUIRED**                                                                                                  |
 | **`onChangeValue`**  | function |         | Callback that is called when the input's value changes. **REQUIRED**                                                                          |
 | **`unit`**           | string   |         | Character to be prefixed on the value.                                                                                                        |
 | **`delimiter`**      | string   | ,       | Character for thousands delimiter.                                                                                                            |
@@ -125,10 +125,10 @@ function MyComponent() {
 
 It includes the same props of the CurrencyInput wtih the additional of the following:
 
-| Prop             | Type        | Default | Description                                       |
-| ---------------- | ----------- | ------- | ------------------------------------------------- |
-| **`containerStyle`** | style propl |         | Style for the container View that wraps the Text. |
-| **`caretColor`**     | string      | #6495ed | Color of the caret.                               |
+| Prop                 | Type       | Default | Description                                       |
+| -------------------- | ---------- | ------- | ------------------------------------------------- |
+| **`containerStyle`** | style prop |         | Style for the container View that wraps the Text. |
+| **`caretColor`**     | string     | #6495ed | Color of the caret.                               |
 
 <br>
 
@@ -137,7 +137,7 @@ It includes the same props of the CurrencyInput wtih the additional of the follo
 ```javascript
 import { formatNumber } from 'react-native-currency-input';
 
-const value = 2375923.3;
+const value = -2375923.3;
 
 const formattedValue = formatNumber(value, {
   separator: ',',
@@ -152,8 +152,8 @@ console.log(formattedValue); // R$ 2.375.923,30
 
 ### `options` (optional)
 
-| Name             | Type    | Default | Description                                  |
-| ---------------- | ------- | ------- | -------------------------------------------- |
+| Name                 | Type    | Default | Description                                  |
+| -------------------- | ------- | ------- | -------------------------------------------- |
 | **`unit`**           | string  |         | Character to be prefixed on the value.       |
 | **`delimiter`**      | string  | ,       | Character for thousands delimiter.           |
 | **`separator`**      | string  | .       | Decimal separator character.                 |

@@ -31,6 +31,11 @@
   },
   "keywords": [
     "react-native",
+    "react-native-currency",
+    "react-native-currency-input",
+    "react-native-number-format",
+    "react-native-number-input",
+    "react-native-component",
     "ios",
     "android"
   ],
