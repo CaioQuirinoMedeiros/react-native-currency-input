@@ -58,7 +58,7 @@ function MyComponent() {
 
 ## Props
 
-This component uses the same props as [<TextInput/>](https://facebook.github.io/react-native/docs/textinput.html). Below are additional props for this component:
+This component uses the same props as [`<TextInput/>`](https://facebook.github.io/react-native/docs/textinput.html). Below are the additional props for this component:
 
 | Prop                 | Type     | Default | Description                                                                                                                                   |
 | -------------------- | -------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -71,7 +71,7 @@ This component uses the same props as [<TextInput/>](https://facebook.github.io/
 | **`ignoreNegative`** | boolean  | false   | Set this to true to disable negative values.                                                                                                  |
 | **`maxValue`**       | number   |         | Max value allowed. This might cause unexpected behavior if you pass a value higher than this direct to the input.                             |
 | **`minValue`**       | number   |         | Min value allowed. This might cause unexpected behavior if you pass a value lower than this direct to the input.                              |
-| **`onChangeText`**   | function |         | Callback that is called when the input's text changes. **IMPORTANT**: This does not controll the input value, you should use `onChangeValue`. |
+| **`onChangeText`**   | function |         | Callback that is called when the input's text changes. **IMPORTANT**: This does not control the input value, you should use `onChangeValue`. |
 
 ## Example
 
