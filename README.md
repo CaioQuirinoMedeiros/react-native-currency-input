@@ -62,16 +62,16 @@ This component uses the same props as [<TextInput/>](https://facebook.github.io/
 
 | Prop             | Type     | Default | Description                                                                                                                                   |
 | ---------------- | -------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `value`          | number   |         | The value for controlled input. **REQUIRED**                                                                                                  |
-| `onChangeValue`  | function |         | Callback that is called when the input's value changes. **REQUIRED**                                                                          |
-| `unit`           | string   |         | Character to be prefixed on the value.                                                                                                        |
-| `delimiter`      | string   | ,       | Character for thousands delimiter.                                                                                                            |
-| `separator`      | string   | .       | Decimal separator character.                                                                                                                  |
-| `precision`      | number   | 2       | Decimal precision.                                                                                                                            |
-| `ignoreNegative` | boolean  | false   | Set this to true to disable negative values.                                                                                                  |
-| `maxValue`       | number   |         | Max value allowed. This might cause unexpected behavior if you pass a value higher than this direct to the input.                             |
-| `minValue`       | number   |         | Min value allowed. This might cause unexpected behavior if you pass a value lower than this direct to the input.                              |
-| `onChangeText`   | function |         | Callback that is called when the input's text changes. **IMPORTANT**: This does not controll the input value, you should use `onChangeValue`. |
+| **`value`**      | number   |         | The value for controlled input. **REQUIRED**                                                                                                  |
+| **`onChangeValue`**  | function |         | Callback that is called when the input's value changes. **REQUIRED**                                                                          |
+| **`unit`**           | string   |         | Character to be prefixed on the value.                                                                                                        |
+| **`delimiter`**      | string   | ,       | Character for thousands delimiter.                                                                                                            |
+| **`separator`**      | string   | .       | Decimal separator character.                                                                                                                  |
+| **`precision`**      | number   | 2       | Decimal precision.                                                                                                                            |
+| **`ignoreNegative`** | boolean  | false   | Set this to true to disable negative values.                                                                                                  |
+| **`maxValue`**       | number   |         | Max value allowed. This might cause unexpected behavior if you pass a value higher than this direct to the input.                             |
+| **`minValue`**       | number   |         | Min value allowed. This might cause unexpected behavior if you pass a value lower than this direct to the input.                              |
+| **`onChangeText`**   | function |         | Callback that is called when the input's text changes. **IMPORTANT**: This does not controll the input value, you should use `onChangeValue`. |
 
 ## Example
 
@@ -127,8 +127,8 @@ It includes the same props of the CurrencyInput wtih the additional of the follo
 
 | Prop             | Type        | Default | Description                                       |
 | ---------------- | ----------- | ------- | ------------------------------------------------- |
-| `containerStyle` | style propl |         | Style for the container View that wraps the Text. |
-| `caretColor`     | string      | #6495ed | Color of the caret.                               |
+| **`containerStyle`** | style propl |         | Style for the container View that wraps the Text. |
+| **`caretColor`**     | string      | #6495ed | Color of the caret.                               |
 
 <br>
 
@@ -154,11 +154,11 @@ console.log(formattedValue); // R$ 2.375.923,30
 
 | Name             | Type    | Default | Description                                  |
 | ---------------- | ------- | ------- | -------------------------------------------- |
-| `unit`           | string  |         | Character to be prefixed on the value.       |
-| `delimiter`      | string  | ,       | Character for thousands delimiter.           |
-| `separator`      | string  | .       | Decimal separator character.                 |
-| `precision`      | number  | 2       | Decimal precision.                           |
-| `ignoreNegative` | boolean | false   | Set this to true to disable negative values. |
+| **`unit`**           | string  |         | Character to be prefixed on the value.       |
+| **`delimiter`**      | string  | ,       | Character for thousands delimiter.           |
+| **`separator`**      | string  | .       | Decimal separator character.                 |
+| **`precision`**      | number  | 2       | Decimal precision.                           |
+| **`ignoreNegative`** | boolean | false   | Set this to true to disable negative values. |
 
 ## Contributing
 
