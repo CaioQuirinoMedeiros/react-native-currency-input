@@ -1,10 +1,4 @@
-interface FormatNumberOptions {
-  precision?: number;
-  separator?: string;
-  delimiter?: string;
-  unit?: string;
-  ignoreNegative?: boolean;
-}
+import type { FormatNumberOptions } from '../props';
 
 export default (input: number, options?: FormatNumberOptions) => {
   const {

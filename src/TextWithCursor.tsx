@@ -30,7 +30,7 @@ const TextWithCursor = (textWithCursorProps: TextWithCursorProps) => {
         {...cursorProps}
         style={[
           {
-            fontSize: cursorFontSize * (cursorFontSize < 26 ? 1.32 : 1.25),
+            fontSize: cursorFontSize * (cursorFontSize < 26 ? 1.42 : 1.25),
           },
           styles.cursor,
           cursorProps?.style,
@@ -46,7 +46,7 @@ const TextWithCursor = (textWithCursorProps: TextWithCursorProps) => {
 const styles = StyleSheet.create({
   text: {
     fontSize: 18,
-    marginTop: -2,
+    marginTop: -3.2,
   },
   cursor: {
     color: '#6495ed',

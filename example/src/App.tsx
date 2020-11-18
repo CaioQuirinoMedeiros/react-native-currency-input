@@ -1,84 +1,86 @@
 import * as React from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import CurrencyInput, { CurrencyInputMask } from 'react-native-currency-input';
+import {
+  KeyboardAvoidingView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+} from 'react-native';
+import CurrencyInput, { FakeCurrencyInput } from 'react-native-currency-input';
 
 export default function App() {
-  const [valorText, setValorTexto] = React.useState('');
   const [valor, setValor] = React.useState<number | null>(null);
 
   return (
-    <ScrollView
-      contentContainerStyle={styles.container}
-      keyboardShouldPersistTaps="handled"
-    >
-      <CurrencyInputMask
-        value={valor}
-        onChangeText={setValorTexto}
-        style={styles.inputMask}
-        containerStyle={styles.inputMaskContainer}
-        onChangeValue={(value) => {
-          console.log('valor mudou para: ', value);
-          setValor(value);
-        }}
-        // ignoreNegative
-        selectionColor="orange"
-        caretColor="green"
-        keyboardType="numeric"
-        precision={3}
-        // separator="-"
-        // delimiter="."
-        unit={'R$ '}
-        // unit="US$ "
-      />
-      <CurrencyInput
-        value={valor}
-        onChangeText={setValorTexto}
-        style={styles.input}
-        onChangeValue={setValor}
-        keyboardType="numeric"
-        precision={2}
-        ignoreNegative
-        // maxValue={92738.86}
-        // minValue={-2239}
-        separator=","
-      />
+    <KeyboardAvoidingView style={styles.screenContainer}>
+      <ScrollView
+        contentContainerStyle={styles.container}
+        keyboardShouldPersistTaps="handled"
+      >
+        <CurrencyInput
+          value={valor}
+          style={styles.inputBasic}
+          onChangeValue={setValor}
+          delimiter=""
+          separator="."
+          precision={3}
+        />
+        <FakeCurrencyInput
+          value={valor}
+          style={styles.inputMask}
+          containerStyle={styles.inputMaskContainer}
+          onChangeValue={setValor}
+          caretColor="red"
+          unit={'R$ '}
+        />
+        <CurrencyInput
+          value={valor}
+          style={styles.inputBasic}
+          onChangeValue={setValor}
+          unit="US$ "
+          ignoreNegative
+          delimiter=","
+          precision={2}
+          separator="."
+        />
 
-      <Text>valor numerico: {valor}</Text>
-      <Text>valor texto: {valorText}</Text>
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          setValor(2385.23);
-        }}
-      >
-        <Text>2385.23</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          setValor(0);
-        }}
-      >
-        <Text>0</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          setValor(null);
-        }}
-      >
-        <Text>null</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          setValor(-927391.23);
-        }}
-      >
-        <Text>-927391.23</Text>
-      </TouchableOpacity>
-    </ScrollView>
+        <View style={styles.buttonsWrapper}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              setValor(2385.23);
+            }}
+          >
+            <Text>2385.23</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              setValor(0);
+            }}
+          >
+            <Text>0</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              setValor(null);
+            }}
+          >
+            <Text>null</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              setValor(-927391.23);
+            }}
+          >
+            <Text>-927391.23</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -86,34 +88,43 @@ const styles = StyleSheet.create({
   button: {
     padding: 16,
     borderRadius: 6,
-    backgroundColor: '#cddccd',
+    backgroundColor: '#ddd',
+    flexGrow: 1,
     alignItems: 'center',
     margin: 4,
     justifyContent: 'center',
   },
+  buttonsWrapper: {
+    flexDirection: 'row',
+    marginTop: 16,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   container: {
-    flex: 1,
+    flexGrow: 1,
     justifyContent: 'center',
-    borderWidth: 8,
     padding: 16,
   },
-  input: {
+  inputBasic: {
+    marginVertical: 8,
+    fontSize: 18,
     borderWidth: 1,
     borderColor: '#cdcdcd',
-    borderRadius: 8,
-    height: 46,
-    fontSize: 18,
+    paddingHorizontal: 12,
+    height: 54,
   },
   inputMask: {
-    fontSize: 23,
-    // fontStyle: 'italic',
-    // borderWidth: 1,
+    fontSize: 18,
   },
   inputMaskContainer: {
     borderColor: '#cdcdcd',
-    // alignItems: 'center',
+    height: 54,
+    marginVertical: 8,
+    paddingHorizontal: 12,
     justifyContent: 'center',
-    paddingHorizontal: 6,
-    borderBottomWidth: 1,
+    borderWidth: 1,
+  },
+  screenContainer: {
+    flex: 1,
   },
 });

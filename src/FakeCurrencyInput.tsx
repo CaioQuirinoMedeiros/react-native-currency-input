@@ -3,13 +3,13 @@ import { StyleSheet, TextInput, View } from 'react-native';
 
 import CurrencyInput from './CurrencyInput';
 import TextWithCursor from './TextWithCursor';
-import type { CurrencyInputMaskProps } from './props';
+import type { FakeCurrencyInputProps } from './props';
 
 /**
  * This component hides the real currency input and use a Text to imitate the input. So you won't get the flickering issue, but will lost selection functionality.
  * The cursor is not a real cursor, but a pipe character (|) and it'll be always at the end of the text.
  */
-const CurrencyInputMask = React.forwardRef<TextInput, CurrencyInputMaskProps>(
+const FakeCurrencyInput = React.forwardRef<TextInput, FakeCurrencyInputProps>(
   (props, ref) => {
     const {
       value,
@@ -76,4 +76,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CurrencyInputMask;
+export default FakeCurrencyInput;
