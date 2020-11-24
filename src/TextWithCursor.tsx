@@ -15,13 +15,28 @@ const TextWithCursor = (textWithCursorProps: TextWithCursorProps) => {
 
   const blinkVisible = useBlink();
 
+  const [isTyping, setIsTyping] = React.useState(false);
+
+  const timeout = React.useRef<NodeJS.Timeout>();
+
   const cursorVisibility = React.useMemo(() => {
-    return cursorVisible && blinkVisible;
-  }, [blinkVisible, cursorVisible]);
+    return cursorVisible && (blinkVisible || isTyping);
+  }, [blinkVisible, cursorVisible, isTyping]);
 
   const cursorFontSize = React.useMemo(() => {
     return StyleSheet.flatten([styles.text, style]).fontSize || 18;
   }, [style]);
+
+  React.useEffect(() => {
+    setIsTyping(true);
+    timeout.current = setTimeout(() => {
+      setIsTyping(false);
+    }, 500);
+
+    return () => {
+      timeout.current && clearTimeout(timeout.current);
+    };
+  }, [children]);
 
   return (
     <Text style={[styles.text, style]} {...rest}>

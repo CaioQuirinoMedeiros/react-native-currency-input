@@ -18,6 +18,7 @@ export default function App() {
         contentContainerStyle={styles.container}
         keyboardShouldPersistTaps="handled"
       >
+        <Text style={styles.label}>CurrencyInput</Text>
         <CurrencyInput
           value={valor}
           style={styles.inputBasic}
@@ -25,14 +26,6 @@ export default function App() {
           delimiter=""
           separator="."
           precision={3}
-        />
-        <FakeCurrencyInput
-          value={valor}
-          style={styles.inputMask}
-          containerStyle={styles.inputMaskContainer}
-          onChangeValue={setValor}
-          caretColor="red"
-          unit={'R$ '}
         />
         <CurrencyInput
           value={valor}
@@ -44,15 +37,35 @@ export default function App() {
           precision={2}
           separator="."
         />
+        <CurrencyInput
+          value={valor}
+          style={styles.inputBasic}
+          onChangeValue={setValor}
+          precision={7}
+          delimiter=","
+          separator="."
+          unit={'LAT: '}
+        />
+        <Text style={styles.label}>FakeCurrencyInput</Text>
+        <FakeCurrencyInput
+          value={valor}
+          style={styles.inputMask}
+          containerStyle={styles.inputMaskContainer}
+          onChangeValue={setValor}
+          precision={7}
+          delimiter=","
+          separator="."
+          unit={'LAT: '}
+        />
 
         <View style={styles.buttonsWrapper}>
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              setValor(2385.23);
+              setValor(238551.23);
             }}
           >
-            <Text>2385.23</Text>
+            <Text>238551.23</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.button}
@@ -73,10 +86,10 @@ export default function App() {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              setValor(-927391.23);
+              setValor(-927.863942);
             }}
           >
-            <Text>-927391.23</Text>
+            <Text>-927.863942</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -123,6 +136,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     justifyContent: 'center',
     borderWidth: 1,
+  },
+  label: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 24,
   },
   screenContainer: {
     flex: 1,
