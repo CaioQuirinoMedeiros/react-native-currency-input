@@ -1,10 +1,22 @@
-# React Native Currency Input
+<h1 align="center">React Native Currency Input</h1>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/platform-Android%20%7C%20iOS-brightgreen" />
+  <img src="https://img.shields.io/npm/dm/react-native-currency-input" />
+  <img src="https://img.shields.io/github/issues-closed-raw/CaioQuirinoMedeiros/react-native-currency-input" />
+  <img src="https://img.shields.io/bundlephobia/min/react-native-currency-input" />
+  <img src="https://img.shields.io/npm/types/react-native-currency-input" />
+  <img src="https://img.shields.io/github/v/tag/CaioQuirinoMedeiros/react-native-currency-input" />
+  <img src="https://img.shields.io/github/license/CaioQuirinoMedeiros/react-native-currency-input" />
+</p>
 
 A simple currency input component for both IOS and Android.
 
 The goal of `react-native-currency-input` is to offer a simple and effective way to handle number inputs with custom format, usually a currency input case, but it can actually be used for other purposes.
 
-![example](https://media.giphy.com/media/yjAZYT35NCl5XUufW9/giphy.gif)
+<p align="center">
+  <img src="https://media.giphy.com/media/q2D5lPppXYQef8YtSs/giphy.gif" />
+</p>
 
 ## Features
 
@@ -60,17 +72,17 @@ function MyComponent() {
 
 This component uses the same props as [`<TextInput/>`](https://facebook.github.io/react-native/docs/textinput.html). Below are the additional props for this component:
 
-| Prop                 | Type     | Default | Description                                                                                                                                   |
-| -------------------- | -------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`value`**          | number   |         | The value for controlled input. **REQUIRED**                                                                                                  |
-| **`onChangeValue`**  | function |         | Callback that is called when the input's value changes. **REQUIRED**                                                                          |
-| **`unit`**           | string   |         | Character to be prefixed on the value.                                                                                                        |
-| **`delimiter`**      | string   | ,       | Character for thousands delimiter.                                                                                                            |
-| **`separator`**      | string   | .       | Decimal separator character.                                                                                                                  |
-| **`precision`**      | number   | 2       | Decimal precision.                                                                                                                            |
-| **`ignoreNegative`** | boolean  | false   | Set this to true to disable negative values.                                                                                                  |
-| **`maxValue`**       | number   |         | Max value allowed. This might cause unexpected behavior if you pass a value higher than this direct to the input.                             |
-| **`minValue`**       | number   |         | Min value allowed. This might cause unexpected behavior if you pass a value lower than this direct to the input.                              |
+| Prop                 | Type     | Default | Description                                                                                                                                  |
+| -------------------- | -------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`value`**          | number   |         | The value for controlled input. **REQUIRED**                                                                                                 |
+| **`onChangeValue`**  | function |         | Callback that is called when the input's value changes. **REQUIRED**                                                                         |
+| **`unit`**           | string   |         | Character to be prefixed on the value.                                                                                                       |
+| **`delimiter`**      | string   | ,       | Character for thousands delimiter.                                                                                                           |
+| **`separator`**      | string   | .       | Decimal separator character.                                                                                                                 |
+| **`precision`**      | number   | 2       | Decimal precision.                                                                                                                           |
+| **`ignoreNegative`** | boolean  | false   | Set this to true to disable negative values.                                                                                                 |
+| **`maxValue`**       | number   |         | Max value allowed. This might cause unexpected behavior if you pass a value higher than this direct to the input.                            |
+| **`minValue`**       | number   |         | Min value allowed. This might cause unexpected behavior if you pass a value lower than this direct to the input.                             |
 | **`onChangeText`**   | function |         | Callback that is called when the input's text changes. **IMPORTANT**: This does not control the input value, you should use `onChangeValue`. |
 
 ## Example
@@ -94,8 +106,8 @@ This component hides the real currency input and use a Text to imitate the input
   - No [flickering issue](https://reactnative.dev/docs/textinput#value) as a controlled input component
   - The cursor is locked at the end, avoiding the user to mess up with the mask
 - Cons
-  - Lost selection functionality... The user will still be able to copy/paste, but with a bad experience
-  - The cursor is locked at the end... Some blessed users will complain
+  - Lost of selection functionality... The user will still be able to copy/paste, but with a bad experience
+  - The cursor is locked at the end... You may have users who won't like that
 
 ### `FakeCurrencyInput` Usage
 
@@ -123,7 +135,7 @@ function MyComponent() {
 
 ### `FakeCurrencyInput` Props
 
-It includes the same props of the CurrencyInput wtih the additional of the following:
+It includes the same props of the CurrencyInput with the additional of the following:
 
 | Prop                 | Type       | Default | Description                                       |
 | -------------------- | ---------- | ------- | ------------------------------------------------- |
