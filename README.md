@@ -6,7 +6,7 @@
   <img src="https://img.shields.io/github/issues-closed-raw/CaioQuirinoMedeiros/react-native-currency-input" />
   <img src="https://img.shields.io/bundlephobia/min/react-native-currency-input" />
   <img src="https://img.shields.io/npm/types/react-native-currency-input" />
-  <img src="https://img.shields.io/github/v/tag/CaioQuirinoMedeiros/react-native-currency-input" />
+  <img src="https://img.shields.io/npm/v/react-native-currency-input" />
   <img src="https://img.shields.io/github/license/CaioQuirinoMedeiros/react-native-currency-input" />
 </p>
 
