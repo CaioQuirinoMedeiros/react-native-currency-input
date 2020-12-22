@@ -1,5 +1,11 @@
 import * as React from 'react';
-import type { BlinkProps } from '../props';
+import type { ViewProps } from 'react-native';
+export interface BlinkProps extends ViewProps {
+  /**
+   * Blink rate in milliseconds. Defaults to 500.
+   */
+  blinkRate?: number;
+}
 
 export default (blinkProps?: BlinkProps) => {
   const { blinkRate = 500 } = blinkProps || {};

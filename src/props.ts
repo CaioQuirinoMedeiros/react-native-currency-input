@@ -1,9 +1,8 @@
 import type {
   TextInputProps,
-  ViewProps,
-  TextProps,
   StyleProp,
   ViewStyle,
+  TextProps,
 } from 'react-native';
 
 export interface FormatNumberOptions {
@@ -108,11 +107,4 @@ export interface TextWithCursorProps extends TextProps {
    * Props for the cursor. Use this to set a custom `style` prop.
    */
   cursorProps?: TextProps;
-}
-
-export interface BlinkProps extends ViewProps {
-  /**
-   * Blink rate in milliseconds. Defaults to 500.
-   */
-  blinkRate?: number;
 }
