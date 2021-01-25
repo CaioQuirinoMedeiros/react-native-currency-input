@@ -10,7 +10,7 @@
   <img src="https://img.shields.io/github/license/CaioQuirinoMedeiros/react-native-currency-input" />
 </p>
 
-A simple currency input component for both IOS and Android.
+A simple currency input component for both iOS and Android.
 
 The goal of `react-native-currency-input` is to offer a simple and effective way to handle number inputs with custom format, usually a currency input case, but it can actually be used for other purposes.
 
@@ -20,7 +20,7 @@ The goal of `react-native-currency-input` is to offer a simple and effective way
 
 ## Features
 
-- A simple and practical component for number inputs (read currency input)
+- A simple and practical component for number inputs
 - It's just a [`<TextInput/>`](https://facebook.github.io/react-native/docs/textinput.html) component, so you can use its props and it's easy to customize
 - Set precision, delimiter, separator and unit so you can actually have any number format you want
 - It handles negative values, in addition to having a prop to disable it
