@@ -5,13 +5,7 @@ import type { TextWithCursorProps } from './props';
 import useBlink from './hooks/useBlink';
 
 const TextWithCursor = (textWithCursorProps: TextWithCursorProps) => {
-  const {
-    children,
-    cursorVisible,
-    style,
-    cursorProps,
-    ...rest
-  } = textWithCursorProps;
+  const { children, cursorVisible, style, cursorProps, ...rest } = textWithCursorProps;
 
   const blinkVisible = useBlink();
 

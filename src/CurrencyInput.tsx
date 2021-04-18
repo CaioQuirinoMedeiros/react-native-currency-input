@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { TextInput } from 'react-native';
 
-import formatNumber from './utils/formatNumber';
+import formatNumber, { addSignPrefixAndSuffix } from './utils/formatNumber';
 import type { CurrencyInputProps } from './props';
 
 export default React.forwardRef<TextInput, CurrencyInputProps>((props, ref) => {
@@ -11,29 +11,47 @@ export default React.forwardRef<TextInput, CurrencyInputProps>((props, ref) => {
     onChangeValue,
     separator,
     delimiter,
-    unit = '',
+    prefix = '',
+    suffix = '',
     precision = 2,
     maxValue,
     minValue,
-    ignoreNegative,
+    signPosition = 'afterPrefix',
+    showPositiveSign,
     ...rest
   } = props;
 
-  const [startNegative, setStartNegative] = React.useState(false);
+  const [startingWithSign, setStartingWithSign] = React.useState<'-' | '+'>();
+
+  const noNegativeValues = !!minValue && minValue > 0;
+  const noPositiveValues = !!maxValue && maxValue < 0;
 
   const formattedValue = React.useMemo(() => {
     if (!!value || value === 0 || value === -0) {
       return formatNumber(value, {
         separator,
-        unit,
+        prefix,
+        suffix,
         precision,
         delimiter,
-        ignoreNegative: !!ignoreNegative,
+        ignoreNegative: noNegativeValues,
+        signPosition,
+        showPositiveSign,
       });
     } else {
       return '';
     }
-  }, [delimiter, ignoreNegative, precision, separator, unit, value]);
+  }, [
+    value,
+    separator,
+    prefix,
+    suffix,
+    precision,
+    delimiter,
+    noNegativeValues,
+    signPosition,
+    showPositiveSign,
+  ]);
 
   React.useEffect(() => {
     onChangeText && onChangeText(formattedValue);
@@ -41,22 +59,58 @@ export default React.forwardRef<TextInput, CurrencyInputProps>((props, ref) => {
 
   const handleChangeText = React.useCallback(
     (text: string) => {
-      const textWithoutUnit = text.replace(unit, '');
+      let textWithoutPrefix = text;
 
-      // Allow starting with a minus sign
-      if (/^(-|-0)$/.test(textWithoutUnit) && !ignoreNegative) {
-        setStartNegative(true);
-        onChangeText && onChangeText(unit + '-');
-        return;
-      } else {
-        setStartNegative(false);
+      if (prefix) {
+        textWithoutPrefix = text.replace(prefix, '');
+        if (textWithoutPrefix === text) {
+          textWithoutPrefix = text.replace(prefix.slice(0, -1), '');
+        }
       }
 
-      const negative = textWithoutUnit.charAt(0) === '-';
+      let textWithoutPrefixAndSufix = textWithoutPrefix;
+      if (suffix) {
+        const suffixRegex = new RegExp(`${suffix}([^${suffix}]*)$`);
+        textWithoutPrefixAndSufix = textWithoutPrefix.replace(suffixRegex, '');
 
-      const textNumericValue = text.replace(/\D+/g, '');
+        if (textWithoutPrefixAndSufix === textWithoutPrefix) {
+          textWithoutPrefixAndSufix = textWithoutPrefix.replace(suffix.slice(1), '');
+        }
+      }
 
-      const numberValue = Number(textNumericValue) * (negative ? -1 : 1);
+      // Starting with a minus or plus sign
+      if (/^(-|-0)$/.test(text) && !noNegativeValues) {
+        setStartingWithSign('-');
+        onChangeText &&
+          onChangeText(
+            addSignPrefixAndSuffix(formattedValue, {
+              prefix,
+              suffix,
+              sign: '-',
+              signPosition,
+            })
+          );
+        return;
+      } else if (/^(\+|\+0)$/.test(text) && !noPositiveValues) {
+        setStartingWithSign('+');
+        onChangeText &&
+          onChangeText(
+            addSignPrefixAndSuffix(formattedValue, {
+              prefix,
+              suffix,
+              sign: '+',
+              signPosition,
+            })
+          );
+      } else {
+        setStartingWithSign(undefined);
+      }
+
+      const isNegativeValue = textWithoutPrefixAndSufix.includes('-');
+
+      const textNumericValue = textWithoutPrefixAndSufix.replace(/\D+/g, '');
+
+      const numberValue = Number(textNumericValue) * (isNegativeValue ? -1 : 1);
 
       const zerosOnValue = textNumericValue.replace(/[^0]/g, '').length;
 
@@ -78,22 +132,42 @@ export default React.forwardRef<TextInput, CurrencyInputProps>((props, ref) => {
       onChangeValue && onChangeValue(newValue);
     },
     [
-      unit,
-      ignoreNegative,
+      suffix,
+      prefix,
+      noNegativeValues,
+      noPositiveValues,
       precision,
       maxValue,
       minValue,
       onChangeValue,
       onChangeText,
+      formattedValue,
+      signPosition,
     ]
   );
 
+  const textInputValue = React.useMemo(() => {
+    return startingWithSign
+      ? addSignPrefixAndSuffix(formattedValue, {
+          prefix,
+          suffix,
+          sign: startingWithSign,
+          signPosition,
+        })
+      : formattedValue;
+  }, [formattedValue, prefix, signPosition, startingWithSign, suffix]);
+
   return (
     <TextInput
-      value={startNegative ? unit + '-' : formattedValue}
-      onChangeText={handleChangeText}
       keyboardType="numeric"
+      selection={
+        suffix
+          ? { start: Math.max(textInputValue.length - suffix.length, 0) }
+          : props?.selection
+      }
       {...rest}
+      value={textInputValue}
+      onChangeText={handleChangeText}
       ref={ref}
     />
   );

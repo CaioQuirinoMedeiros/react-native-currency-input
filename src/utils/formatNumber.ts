@@ -1,16 +1,40 @@
 import type { FormatNumberOptions } from '../props';
 
+interface AddSignPrefixAndSuffixProps {
+  sign?: '+' | '-' | '';
+  prefix?: string;
+  suffix?: string;
+  signPosition: 'beforePrefix' | 'afterPrefix';
+}
+
+export const addSignPrefixAndSuffix = (
+  value: any,
+  options: AddSignPrefixAndSuffixProps
+) => {
+  const { prefix, sign, suffix, signPosition } = options;
+
+  switch (signPosition) {
+    case 'beforePrefix':
+      return `${sign}${prefix}${value}${suffix}`;
+    case 'afterPrefix':
+      return `${prefix}${sign}${value}${suffix}`;
+  }
+};
+
 export default (input: number, options?: FormatNumberOptions) => {
   const {
     precision,
     separator = ',',
     delimiter = '.',
-    unit = '',
+    prefix = '',
+    suffix = '',
     ignoreNegative,
+    showPositiveSign,
+    signPosition = 'afterPrefix',
   } = options || {};
 
   const negative = ignoreNegative ? false : input < 0;
-  const sign = negative ? '-' : '';
+  const sign = negative ? '-' : showPositiveSign ? '+' : '';
 
   const string = Math.abs(input).toFixed(precision);
 
@@ -31,7 +55,10 @@ export default (input: number, options?: FormatNumberOptions) => {
     formattedNumber += separator + decimals;
   }
 
-  formattedNumber = `${unit}${sign}${formattedNumber}`;
-
-  return formattedNumber;
+  return addSignPrefixAndSuffix(formattedNumber, {
+    prefix,
+    suffix,
+    sign,
+    signPosition,
+  });
 };

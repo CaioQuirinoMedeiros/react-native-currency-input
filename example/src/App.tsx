@@ -10,7 +10,7 @@ import {
 import CurrencyInput, { FakeCurrencyInput } from 'react-native-currency-input';
 
 export default function App() {
-  const [valor, setValor] = React.useState<number | null>(null);
+  const [valor, setValor] = React.useState<number | null>(0);
 
   return (
     <KeyboardAvoidingView style={styles.screenContainer}>
@@ -18,21 +18,21 @@ export default function App() {
         contentContainerStyle={styles.container}
         keyboardShouldPersistTaps="handled"
       >
-        <Text style={styles.label}>CurrencyInput</Text>
+        <Text style={styles.label}>CurrencyInput Examples</Text>
         <CurrencyInput
           value={valor}
           style={styles.inputBasic}
           onChangeValue={setValor}
-          delimiter=""
-          separator="."
-          precision={3}
+          minValue={0}
+          prefix="R$ "
+          precision={2}
         />
         <CurrencyInput
           value={valor}
           style={styles.inputBasic}
           onChangeValue={setValor}
-          unit="US$ "
-          ignoreNegative
+          prefix={'U$ '}
+          signPosition="beforePrefix"
           delimiter=","
           precision={2}
           separator="."
@@ -41,31 +41,30 @@ export default function App() {
           value={valor}
           style={styles.inputBasic}
           onChangeValue={setValor}
-          precision={7}
-          delimiter=","
-          separator="."
-          unit={'LAT: '}
+          precision={0}
+          delimiter=""
+          suffix={' meters'}
         />
-        <Text style={styles.label}>FakeCurrencyInput</Text>
         <FakeCurrencyInput
           value={valor}
           style={styles.inputMask}
           containerStyle={styles.inputMaskContainer}
           onChangeValue={setValor}
           precision={7}
+          showPositiveSign
           delimiter=","
           separator="."
-          unit={'LAT: '}
+          prefix={'LAT: '}
         />
 
         <View style={styles.buttonsWrapper}>
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              setValor(238551.23);
+              setValor(123456.78);
             }}
           >
-            <Text>238551.23</Text>
+            <Text>123456.78</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.button}
@@ -86,10 +85,10 @@ export default function App() {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              setValor(-927.863942);
+              setValor(-9257.863942);
             }}
           >
-            <Text>-927.863942</Text>
+            <Text>-9257.863942</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -138,9 +137,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   label: {
-    fontSize: 18,
+    fontSize: 20,
+    marginBottom: 16,
     fontWeight: 'bold',
     marginTop: 24,
+    textAlign: 'center',
   },
   screenContainer: {
     flex: 1,

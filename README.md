@@ -12,24 +12,24 @@
 
 A simple currency input component for both iOS and Android.
 
-The goal of `react-native-currency-input` is to offer a simple and effective way to handle number inputs with custom format, usually a currency input case, but it can actually be used for other purposes.
+The goal of `react-native-currency-input` is to offer a simple and effective way to handle number inputs with custom format, usually a currency input, but it can be used for any number input case.
 
 <p align="center">
-  <img src="https://media.giphy.com/media/q2D5lPppXYQef8YtSs/giphy.gif" />
+  <img src="https://media.giphy.com/media/IUoA3IbKTtkRyq7R6U/giphy.gif" />
 </p>
 
 ## Features
 
 - A simple and practical component for number inputs
 - It's just a [`<TextInput/>`](https://facebook.github.io/react-native/docs/textinput.html) component, so you can use its props and it's easy to customize
-- Set precision, delimiter, separator and unit so you can actually have any number format you want
-- It handles negative values, in addition to having a prop to disable it
-- Set minimun and maximum value
+- Handle any number format with these powerful props: `precision`, `delimiter`, `separator`, `prefix` and `suffix`.
+- It handles negative values and you can choose the position of the sign with the `signPosition`.
+- Set minimun and maximum values with `minValue` and `maxValue`.
 - Use React Native ES6 and React Hooks
 
 **BONUS**
 
-- [`<FakeCurrencyInput />`](#fakecurrencyinput): A fake input that hides the real TextInput in order to terminate the [flickering issue](https://reactnative.dev/docs/textinput#value)
+- [`<FakeCurrencyInput />`](#fakecurrencyinput): A fake input that hides the real TextInput in order to get rid of the [flickering issue](https://reactnative.dev/docs/textinput#value)
 - [`formatNumber()`](#formatnumbervalue-options): A function that formats number
 
 ## Installation
@@ -70,20 +70,25 @@ function MyComponent() {
 
 ## Props
 
-This component uses the same props as [`<TextInput/>`](https://facebook.github.io/react-native/docs/textinput.html). Below are the additional props for this component:
+| Prop                   | Type     | Default       | Description                                                                                                                                |
+| ---------------------- | -------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **...TextInputProps**  |          |               | Inherit all [props of `TextInput`](https://reactnative.dev/docs/textinput#props).                                                          |
+| **`value`**            | number   |               | The value for controlled input. **REQUIRED**                                                                                               |
+| **`onChangeValue`**    | function |               | Callback that is called when the input's value changes. **REQUIRED**                                                                       |
+| **`prefix`**           | string   |               | Character to be prefixed on the value.                                                                                                     |
+| **`suffix`\***         | string   |               | Character to be suffixed on the value.                                                                                                     |
+| **`delimiter`**        | string   | ,             | Character for thousands delimiter.                                                                                                         |
+| **`separator`**        | string   | .             | Decimal separator character.                                                                                                               |
+| **`precision`**        | number   | 2             | Decimal precision.                                                                                                                         |
+| **`maxValue`**         | number   |               | Max value allowed. Might cause unexpected behavior if you pass a `value` higher than the one defined here.                                 |
+| **`minValue`**         | number   |               | Min value allowed. Might cause unexpected behavior if you pass a `value` lower than the one defined here.                                  |
+| **`signPosition`**     | string   | "afterPrefix" | Where the negative/positive sign (+/-) should be placed.                                                                                   |
+| **`showPositiveSign`** | boolean  | false         | Set this to `true` to show the `+` character on positive values.                                                                           |
+| **`onChangeText`**     | function |               | Callback that is called when the input's text changes. **IMPORTANT**: This does not control the input value, you must use `onChangeValue`. |
 
-| Prop                 | Type     | Default | Description                                                                                                                                  |
-| -------------------- | -------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`value`**          | number   |         | The value for controlled input. **REQUIRED**                                                                                                 |
-| **`onChangeValue`**  | function |         | Callback that is called when the input's value changes. **REQUIRED**                                                                         |
-| **`unit`**           | string   |         | Character to be prefixed on the value.                                                                                                       |
-| **`delimiter`**      | string   | ,       | Character for thousands delimiter.                                                                                                           |
-| **`separator`**      | string   | .       | Decimal separator character.                                                                                                                 |
-| **`precision`**      | number   | 2       | Decimal precision.                                                                                                                           |
-| **`ignoreNegative`** | boolean  | false   | Set this to true to disable negative values.                                                                                                 |
-| **`maxValue`**       | number   |         | Max value allowed. This might cause unexpected behavior if you pass a value higher than this direct to the input.                            |
-| **`minValue`**       | number   |         | Min value allowed. This might cause unexpected behavior if you pass a value lower than this direct to the input.                             |
-| **`onChangeText`**   | function |         | Callback that is called when the input's text changes. **IMPORTANT**: This does not control the input value, you should use `onChangeValue`. |
+**_\* IMPORTANT:_** Be aware that using the `suffix` implies setting the `selection` property of the `TextInput` internally. You can override the `selection`, but that will cause behavior problems on the component
+
+**_Tip:_** If you don't want negative values, just use `minValue={0}`.
 
 ## Example
 
@@ -100,14 +105,14 @@ yarn android / yarn ios
 
 ## `FakeCurrencyInput`
 
-This component hides the real currency input and use a Text to imitate the input, so you won't get the flickering issue but will lost the selection functionality. The cursor is not a real cursor, but a pipe character (|) that will be always at the end of the text. It also have a wrapper View with position 'relative' on which the Text Input is stretched over.
+This component hides the `TextInput` and use a `Text` on its place, so you'll lost the cursor, but will get rid of the [flickering issue](https://reactnative.dev/docs/textinput#value). To replace the cursor it's used a pipe character (|) that will be always at the end of the text. It also have a wrapper `View` with position "relative" on which the `TextInput` is stretched over.
 
 - Pros
   - No [flickering issue](https://reactnative.dev/docs/textinput#value) as a controlled input component
   - The cursor is locked at the end, avoiding the user to mess up with the mask
 - Cons
-  - Lost of selection functionality... The user will still be able to copy/paste, but with a bad experience
-  - The cursor is locked at the end... You may have users who won't like that
+  - Lost of selection functionality. The user will still be able to copy/paste, but with a bad experience
+  - The cursor is locked at the end...
 
 ### `FakeCurrencyInput` Usage
 
@@ -115,7 +120,7 @@ This component hides the real currency input and use a Text to imitate the input
 import { FakeCurrencyInput } from 'react-native-currency-input';
 
 function MyComponent() {
-  const [value, setValue] = ReactuseState(0); // can also be null
+  const [value, setValue] = React.useState(0); // can also be null
 
   return (
     <FakeCurrencyInput
@@ -137,10 +142,11 @@ function MyComponent() {
 
 It includes the same props of the CurrencyInput with the additional of the following:
 
-| Prop                 | Type       | Default | Description                                       |
-| -------------------- | ---------- | ------- | ------------------------------------------------- |
-| **`containerStyle`** | style prop |         | Style for the container View that wraps the Text. |
-| **`caretColor`**     | string     | #6495ed | Color of the caret.                               |
+| Prop                      | Type       | Default | Description                                       |
+| ------------------------- | ---------- | ------- | ------------------------------------------------- |
+| **...CurrencuInputProps** |            |         | Inherit all [props of `CurrencyInput`](#props).   |
+| **`containerStyle`**      | style prop |         | Style for the container View that wraps the Text. |
+| **`caretColor`**          | string     | #6495ed | Color of the caret.                               |
 
 <br>
 
@@ -153,24 +159,27 @@ const value = -2375923.3;
 
 const formattedValue = formatNumber(value, {
   separator: ',',
-  unit: 'R$ ',
+  prefix: 'R$ ',
   precision: 2,
   delimiter: '.',
-  ignoreNegative: true,
+  signPosition: 'beforePrefix',
 });
 
-console.log(formattedValue); // R$ 2.375.923,30
+console.log(formattedValue); // -R$ 2.375.923,30
 ```
 
 ### `options` (optional)
 
-| Name                 | Type    | Default | Description                                  |
-| -------------------- | ------- | ------- | -------------------------------------------- |
-| **`unit`**           | string  |         | Character to be prefixed on the value.       |
-| **`delimiter`**      | string  | ,       | Character for thousands delimiter.           |
-| **`separator`**      | string  | .       | Decimal separator character.                 |
-| **`precision`**      | number  | 2       | Decimal precision.                           |
-| **`ignoreNegative`** | boolean | false   | Set this to true to disable negative values. |
+| Name                   | Type    | Default       | Description                                                      |
+| ---------------------- | ------- | ------------- | ---------------------------------------------------------------- |
+| **`prefix`**           | string  |               | Character to be prefixed on the value.                           |
+| **`suffix`**           | string  |               | Character to be suffixed on the value.                           |
+| **`delimiter`**        | string  | ,             | Character for thousands delimiter.                               |
+| **`separator`**        | string  | .             | Decimal separator character.                                     |
+| **`precision`**        | number  | 2             | Decimal precision.                                               |
+| **`ignoreNegative`**   | boolean | false         | Set this to true to disable negative values.                     |
+| **`signPosition`**     | string  | "afterPrefix" | Where the negative/positive sign (+/-) should be placed.         |
+| **`showPositiveSign`** | boolean | false         | Set this to `true` to show the `+` character on positive values. |
 
 ## Contributing
 
