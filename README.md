@@ -56,7 +56,7 @@ function MyComponent() {
     <CurrencyInput
       value={value}
       onChangeValue={setValue}
-      unit="$"
+      prefix="$"
       delimiter=","
       separator="."
       precision={2}
@@ -126,7 +126,7 @@ function MyComponent() {
     <FakeCurrencyInput
       value={value}
       onChangeValue={setValue}
-      unit="$"
+      prefix="$"
       delimiter=","
       separator="."
       precision={2}
