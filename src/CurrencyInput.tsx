@@ -23,8 +23,8 @@ export default React.forwardRef<TextInput, CurrencyInputProps>((props, ref) => {
 
   const [startingWithSign, setStartingWithSign] = React.useState<'-' | '+'>();
 
-  const noNegativeValues = !!minValue && minValue > 0;
-  const noPositiveValues = !!maxValue && maxValue < 0;
+  const noNegativeValues = typeof minValue === 'number' && minValue >= 0;
+  const noPositiveValues = typeof maxValue === 'number' && maxValue <= 0;
 
   const formattedValue = React.useMemo(() => {
     if (!!value || value === 0 || value === -0) {
