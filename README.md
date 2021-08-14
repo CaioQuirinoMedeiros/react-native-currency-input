@@ -18,6 +18,18 @@ The goal of `react-native-currency-input` is to offer a simple and effective way
   <img src="https://media.giphy.com/media/IUoA3IbKTtkRyq7R6U/giphy.gif" />
 </p>
 
+- [Features](#features)
+- [Installation](#installation)
+- [Basic Usage](#basic-usage)
+- [Advanced Usage](#advanced-usage)
+- [Props](#props)
+- [Example](#example)
+- [FakeCurrencyInput](#fakecurrencyinput)
+  - [FakeCurrencyInput *Usage*](#fakecurrencyinput-usage)
+  - [FakeCurrencyInput *Props*](#fakecurrencyinput-props)
+- [`formatNumber`](#formatnumbervalue-options)
+  - [`formatNumber` *Options*](#options-optional)
+
 ## Features
 
 - A simple and practical component for number inputs
@@ -44,7 +56,7 @@ or
 yarn add react-native-currency-input
 ```
 
-## Usage
+## Basic Usage
 
 ```javascript
 import CurrencyInput from 'react-native-currency-input';
@@ -52,16 +64,30 @@ import CurrencyInput from 'react-native-currency-input';
 function MyComponent() {
   const [value, setValue] = React.useState(2310.458); // can also be null
 
+  return <CurrencyInput value={value} onChangeValue={setValue} />;
+}
+```
+
+## Advanced Usage
+
+```javascript
+import CurrencyInput from 'react-native-currency-input';
+
+function MyComponent() {
+  const [value, setValue] = React.useState(2310.458);
+
   return (
     <CurrencyInput
       value={value}
       onChangeValue={setValue}
-      prefix="$"
-      delimiter=","
-      separator="."
+      prefix="R$"
+      delimiter="."
+      separator=","
       precision={2}
+      minValue={0}
+      showPositiveSign
       onChangeText={(formattedValue) => {
-        console.log(formattedValue); // $2,310.46
+        console.log(formattedValue); // R$ +2.310,46
       }}
     />
   );
