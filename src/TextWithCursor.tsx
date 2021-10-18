@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View} from 'react-native';
 
 import type { TextWithCursorProps } from './props';
 import useBlink from './hooks/useBlink';
@@ -35,6 +35,7 @@ const TextWithCursor = (textWithCursorProps: TextWithCursorProps) => {
   return (
     <Text style={[styles.text, style]} {...rest}>
       {children}
+    <View style={styles.cursorView}>
       <Text
         {...cursorProps}
         style={[
@@ -48,6 +49,7 @@ const TextWithCursor = (textWithCursorProps: TextWithCursorProps) => {
       >
         |
       </Text>
+      </View>
     </Text>
   );
 };
@@ -57,8 +59,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginTop: -3.2,
   },
+  cursorView: {
+    marginTop: -3.2,
+  },
   cursor: {
     color: '#6495ed',
+    marginLeft: -3.2,
   },
   cursorHidden: {
     color: 'transparent',
