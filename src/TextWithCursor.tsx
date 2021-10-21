@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View} from 'react-native';
 
 import type { TextWithCursorProps } from './props';
 import useBlink from './hooks/useBlink';
