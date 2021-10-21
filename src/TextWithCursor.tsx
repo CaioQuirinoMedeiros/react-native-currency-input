@@ -62,8 +62,6 @@ const styles = StyleSheet.create({
   cursorView: {},
   cursor: {
     color: '#6495ed',
-    marginLeft: -3.2,
-    top: Platform.OS === 'ios' ? 1 : 10,
   },
   cursorHidden: {
     color: 'transparent',
