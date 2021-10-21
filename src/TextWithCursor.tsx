@@ -33,35 +33,39 @@ const TextWithCursor = (textWithCursorProps: TextWithCursorProps) => {
   }, [children]);
 
   return (
-    <Text style={[styles.text, style]} {...rest}>
-      {children}
-      <View style={styles.cursorView}>
-        <Text
-          {...cursorProps}
-          style={[
-            {
-              fontSize: cursorFontSize * (cursorFontSize < 26 ? 1.42 : 1.25),
-            },
-            styles.cursor,
-            cursorProps?.style,
-            !cursorVisibility ? styles.cursorHidden : undefined,
-          ]}
-        >
-          |
-        </Text>
-      </View>
-    </Text>
+    <View style={styles.textWithCursorView}>
+      <Text style={[styles.text, style]} {...rest}>
+        {children}
+      </Text>
+      <Text
+        {...cursorProps}
+        style={[
+          {
+            fontSize: cursorFontSize * (cursorFontSize < 26 ? 1.42 : 1.25),
+          },
+          styles.cursor,
+          cursorProps?.style,
+          !cursorVisibility ? styles.cursorHidden : undefined,
+        ]}
+      >
+        |
+      </Text>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  textWithCursorView: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
   text: {
     fontSize: 18,
-    marginTop: -3.2,
   },
-  cursorView: {},
   cursor: {
     color: '#6495ed',
+    marginTop: -7,
+    marginLeft: -3,
   },
   cursorHidden: {
     color: 'transparent',
