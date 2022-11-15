@@ -1,4 +1,4 @@
-import CurrencyInput from './CurrencyInput';
+import { CurrencyInput } from './CurrencyInput';
 
 export { default as FakeCurrencyInput } from './FakeCurrencyInput';
 export { default as TextWithCursor } from './TextWithCursor';

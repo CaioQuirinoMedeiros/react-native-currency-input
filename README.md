@@ -22,6 +22,7 @@ The goal of `react-native-currency-input` is to offer a simple and effective way
 - [Installation](#installation)
 - [Basic Usage](#basic-usage)
 - [Advanced Usage](#advanced-usage)
+- [Using custom TextInput](#using-custom-textinput)
 - [Props](#props)
 - [Example](#example)
 - [FakeCurrencyInput](#fakecurrencyinput)
@@ -94,6 +95,31 @@ function MyComponent() {
 }
 ```
 
+## Using custom TextInput
+
+```javascript
+import CurrencyInput from 'react-native-currency-input';
+import { Input } from 'native-base';
+
+function MyComponent() {
+  const [value, setValue] = React.useState(2310.458);
+
+  return (
+    <CurrencyInput
+      value={value}
+      onChangeValue={setValue}
+      renderTextInput={textInputProps => <Input {...textInputProps} variant='filled' />}
+      renderText
+      prefix="R$"
+      delimiter="."
+      separator=","
+      precision={2}
+    />
+  );
+}
+```
+
+
 ## Props
 
 | Prop                   | Type     | Default       | Description                                                                                                                                |
@@ -111,6 +137,7 @@ function MyComponent() {
 | **`signPosition`**     | string   | "afterPrefix" | Where the negative/positive sign (+/-) should be placed.                                                                                   |
 | **`showPositiveSign`** | boolean  | false         | Set this to `true` to show the `+` character on positive values.                                                                           |
 | **`onChangeText`**     | function |               | Callback that is called when the input's text changes. **IMPORTANT**: This does not control the input value, you must use `onChangeValue`. |
+| **`renderTextInput`**  | function |               | Use a custom TextInput component.                                                                                                          |
 
 **_\* IMPORTANT:_** Be aware that using the `suffix` implies setting the `selection` property of the `TextInput` internally. You can override the `selection`, but that will cause behavior problems on the component
 

@@ -7,92 +7,108 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
+import { NativeBaseProvider, Input } from 'native-base';
 import CurrencyInput, { FakeCurrencyInput } from 'react-native-currency-input';
 
 export default function App() {
   const [valor, setValor] = React.useState<number | null>(0);
 
-  return (
-    <KeyboardAvoidingView style={styles.screenContainer}>
-      <ScrollView
-        contentContainerStyle={styles.container}
-        keyboardShouldPersistTaps="handled"
-      >
-        <Text style={styles.label}>CurrencyInput Examples</Text>
-        <CurrencyInput
-          value={valor}
-          style={styles.inputBasic}
-          onChangeValue={setValor}
-          minValue={0}
-          prefix="R$ "
-          precision={2}
-        />
-        <CurrencyInput
-          value={valor}
-          style={styles.inputBasic}
-          onChangeValue={setValor}
-          prefix={'U$ '}
-          signPosition="beforePrefix"
-          delimiter=","
-          precision={2}
-          separator="."
-        />
-        <CurrencyInput
-          value={valor}
-          style={styles.inputBasic}
-          onChangeValue={setValor}
-          precision={0}
-          delimiter=""
-          suffix={' meters'}
-        />
-        <FakeCurrencyInput
-          value={valor}
-          style={styles.inputMask}
-          containerStyle={styles.inputMaskContainer}
-          onChangeValue={setValor}
-          precision={7}
-          showPositiveSign
-          delimiter=","
-          separator="."
-          prefix={'LAT: '}
-        />
+  const customInputRef = React.useRef<CurrencyInput>(null);
 
-        <View style={styles.buttonsWrapper}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              setValor(123456.78);
-            }}
-          >
-            <Text>123456.78</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              setValor(0);
-            }}
-          >
-            <Text>0</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              setValor(null);
-            }}
-          >
-            <Text>null</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              setValor(-9257.863942);
-            }}
-          >
-            <Text>-9257.863942</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+  return (
+    <NativeBaseProvider>
+      <KeyboardAvoidingView style={styles.screenContainer}>
+        <ScrollView
+          contentContainerStyle={styles.container}
+          keyboardShouldPersistTaps="handled"
+        >
+          <Text style={styles.label}>CurrencyInput Examples</Text>
+
+          <CurrencyInput
+            value={valor}
+            renderTextInput={(props) => <Input {...props} />}
+            onChangeValue={setValor}
+            minValue={0}
+            prefix="R$ "
+            precision={2}
+            ref={customInputRef}
+          />
+          <CurrencyInput
+            value={valor}
+            style={styles.inputBasic}
+            onChangeValue={setValor}
+            minValue={0}
+            prefix="R$ "
+            precision={2}
+            onSubmitEditing={() => customInputRef.current?.focus()}
+          />
+          <CurrencyInput
+            value={valor}
+            style={styles.inputBasic}
+            onChangeValue={setValor}
+            prefix={'U$ '}
+            signPosition="beforePrefix"
+            delimiter=","
+            precision={2}
+            separator="."
+          />
+          <CurrencyInput
+            value={valor}
+            style={styles.inputBasic}
+            onChangeValue={setValor}
+            precision={0}
+            delimiter=""
+            suffix={' meters'}
+          />
+          <FakeCurrencyInput
+            value={valor}
+            style={styles.inputMask}
+            containerStyle={styles.inputMaskContainer}
+            onChangeValue={setValor}
+            precision={7}
+            showPositiveSign
+            delimiter=","
+            separator="."
+            prefix={'LAT: '}
+          />
+
+          <View style={styles.buttonsWrapper}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                setValor(123456.78);
+              }}
+            >
+              <Text>123456.78</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                setValor(0);
+              }}
+            >
+              <Text>0</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                setValor(null);
+              }}
+            >
+              <Text>null</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                setValor(-9257.863942);
+              }}
+            >
+              <Text>-9257.863942</Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </NativeBaseProvider>
   );
 }
 

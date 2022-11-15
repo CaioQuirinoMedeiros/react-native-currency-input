@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
 
-import CurrencyInput from './CurrencyInput';
+import { CurrencyInput } from './CurrencyInput';
 import TextWithCursor from './TextWithCursor';
 import type { FakeCurrencyInputProps } from './props';
 

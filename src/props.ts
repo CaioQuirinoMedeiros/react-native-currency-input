@@ -1,3 +1,4 @@
+import type React from 'react';
 import type { TextInputProps, StyleProp, ViewStyle, TextProps } from 'react-native';
 
 export interface FormatNumberOptions {
@@ -44,6 +45,7 @@ export interface FormatNumberOptions {
 }
 
 export interface CurrencyInputProps extends Omit<TextInputProps, 'value'> {
+  renderTextInput?: (props: TextInputProps) => JSX.Element;
   /**
    * Character for thousands delimiter.
    */

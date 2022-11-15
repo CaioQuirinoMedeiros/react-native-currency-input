@@ -4,8 +4,14 @@ import { TextInput } from 'react-native';
 import formatNumber, { addSignPrefixAndSuffix } from './utils/formatNumber';
 import type { CurrencyInputProps } from './props';
 
-export default React.forwardRef<TextInput, CurrencyInputProps>((props, ref) => {
+export type CurrencyInput = TextInput;
+
+export const CurrencyInput = React.forwardRef<TextInput, CurrencyInputProps>(function (
+  props,
+  ref
+) {
   const {
+    renderTextInput,
     value,
     onChangeText,
     onChangeValue,
@@ -157,18 +163,23 @@ export default React.forwardRef<TextInput, CurrencyInputProps>((props, ref) => {
       : formattedValue;
   }, [formattedValue, prefix, signPosition, startingWithSign, suffix]);
 
-  return (
-    <TextInput
-      keyboardType="numeric"
-      selection={
-        suffix
-          ? { start: Math.max(textInputValue.length - suffix.length, 0) }
-          : props?.selection
-      }
-      {...rest}
-      value={textInputValue}
-      onChangeText={handleChangeText}
-      ref={ref}
-    />
+  const nextProps = React.useMemo(
+    () => ({
+      keyboardType: 'numeric' as const,
+      selection: suffix
+        ? { start: Math.max(textInputValue.length - suffix.length, 0) }
+        : props?.selection,
+      ...rest,
+      value: textInputValue,
+      onChangeText: handleChangeText,
+      ref: ref,
+    }),
+    [handleChangeText, props?.selection, ref, rest, suffix, textInputValue]
   );
+
+  if (renderTextInput) {
+    return renderTextInput(nextProps);
+  }
+
+  return <TextInput {...nextProps} />;
 });
