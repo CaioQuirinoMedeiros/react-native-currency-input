@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     left: -20,
     right: 0,
     bottom: 0,
-    fontSize: 1,
+    fontSize: 0,
   },
 });
 
