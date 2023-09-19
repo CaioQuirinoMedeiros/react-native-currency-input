@@ -2,7 +2,7 @@
   "name": "react-native-currency-input",
   "version": "1.1.1",
   "description": "A simple currency input component for both iOS and Android",
-  "main": "lib/commonjs/index",
+  "main": "lib/commonjs/index.js",
   "module": "lib/module/index",
   "types": "lib/typescript/src/index.d.ts",
   "react-native": "src/index",
