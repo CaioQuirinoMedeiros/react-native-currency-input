@@ -199,7 +199,8 @@ It includes the same props of the CurrencyInput with the additional of the follo
 | ------------------------- | ---------- | ------- | ------------------------------------------------- |
 | **...CurrencuInputProps** |            |         | Inherit all [props of `CurrencyInput`](#props).   |
 | **`containerStyle`**      | style prop |         | Style for the container View that wraps the Text. |
-| **`caretColor`**          | string     | #6495ed | Color of the caret.                               |
+| **`caretColor`**          | string     | #6495ed | Color of the caret. Same as caretStyle.color.     |
+| **`caretStyle`**          | style prop |         | Style for the caret text component.               |
 
 <br>
 
